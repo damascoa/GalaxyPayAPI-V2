@@ -18,6 +18,8 @@ public class BaseReturn {
     private Integer totalQtdFoundInPage;
     private List<Charge> Charges;
     private Error error;
+    private List<Carne> Carnes;
+    private Boleto Boleto;
 
     public BaseReturn() {
     }
@@ -60,6 +62,22 @@ public class BaseReturn {
 
     public void setError(Error error) {
         this.error = error;
+    }
+
+    public List<Carne> getCarnes() {
+        return Carnes;
+    }
+
+    public void setCarnes(List<Carne> Carnes) {
+        this.Carnes = Carnes;
+    }
+
+    public Boleto getBoleto() {
+        return Boleto;
+    }
+
+    public void setBoleto(Boleto Boleto) {
+        this.Boleto = Boleto;
     }
 
 }

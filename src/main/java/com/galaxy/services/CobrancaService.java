@@ -12,6 +12,7 @@ import com.galaxy.model.Boleto;
 import com.galaxy.model.ParamsListagem;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import java.util.Arrays;
 import java.util.HashMap;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -69,9 +70,9 @@ public class CobrancaService {
                 System.out.println("TRATANDO ERROS? ");
                 System.out.println(saida);
                 StringBuilder sb = new StringBuilder();
-               
-               BaseReturn saida2 = new Gson().fromJson(saida.getBody(), BaseReturn.class);
-                
+
+                BaseReturn saida2 = new Gson().fromJson(saida.getBody(), BaseReturn.class);
+
                 sb.append(saida2.getError().getMessage()).append("\n");
                 if (saida2.getError().getDetails() != null) {
                     LinkedTreeMap hmap = (LinkedTreeMap) saida2.getError().getDetails();
@@ -136,6 +137,74 @@ public class CobrancaService {
                 //ERRO NAO CATALOGADO
                 throw new Exception("Erro não catalogado.");
         }
+    }
 
+    public BaseReturn getCarne(String[] myIds) throws Exception {
+        HttpResponse<String> response = Unirest.post("https://api.galaxpay.com.br/v2/carnes/onePDF")
+                .header("Authorization", authReturn.getToken_type() + " " + authReturn.getAccess_token())
+                .header("Content-Type", "application/json")
+                .body("{subscriptionsMyIds: " + Arrays.toString(myIds) + " }")
+                .asString();
+        switch (response.getStatus()) {
+            case 200:
+                return new Gson().fromJson(response.getBody(), BaseReturn.class);
+            case 400:
+                BaseReturn saida = new Gson().fromJson(response.getBody(), BaseReturn.class);
+                StringBuilder sb = new StringBuilder();
+                sb.append(saida.getError().getMessage()).append("\n");
+                if (saida.getError().getDetails() != null) {
+                    LinkedTreeMap hmap = (LinkedTreeMap) saida.getError().getDetails();
+                    hmap.forEach((k, v) -> {
+                        sb.append(k).append(" : ").append(v).append("\n");
+                    });
+                }
+                throw new Exception(sb.toString());
+            case 401:
+                //Falha ao autenticar.
+                throw new Exception("Falha ao autenticar.");
+            case 403:
+                throw new Exception("Validação de segurança.");
+            case 404:
+                //Cliente não encontrado.
+                throw new Exception("Assinatura não encontrada.");
+            default:
+                //ERRO NAO CATALOGADO
+                throw new Exception("Erro não catalogado.");
+        }
+    }
+
+    public BaseReturn getPDF(String[] myIds) throws Exception {
+        HttpResponse<String> response = Unirest.post("https://api.galaxpay.com.br/v2/boletos")
+                .header("Authorization", authReturn.getToken_type() + " " + authReturn.getAccess_token())
+                .header("Content-Type", "application/json")
+                .body("{transactionsMyIds: " + Arrays.toString(myIds) + " }")
+                .asString();
+
+        switch (response.getStatus()) {
+            case 200:
+                return new Gson().fromJson(response.getBody(), BaseReturn.class);
+            case 400:
+                BaseReturn saida = new Gson().fromJson(response.getBody(), BaseReturn.class);
+                StringBuilder sb = new StringBuilder();
+                sb.append(saida.getError().getMessage()).append("\n");
+                if (saida.getError().getDetails() != null) {
+                    LinkedTreeMap hmap = (LinkedTreeMap) saida.getError().getDetails();
+                    hmap.forEach((k, v) -> {
+                        sb.append(k).append(" : ").append(v).append("\n");
+                    });
+                }
+                throw new Exception(sb.toString());
+            case 401:
+                //Falha ao autenticar.
+                throw new Exception("Falha ao autenticar.");
+            case 403:
+                throw new Exception("Validação de segurança.");
+            case 404:
+                //Cliente não encontrado.
+                throw new Exception("Transação não encontrada..");
+            default:
+                //ERRO NAO CATALOGADO
+                throw new Exception("Erro não catalogado.");
+        }
     }
 }
