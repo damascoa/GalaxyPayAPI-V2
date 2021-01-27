@@ -6,6 +6,7 @@
 package com.galaxy.model;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,19 @@ public class Customer {
     private List<BigDecimal> phones;
     private Address Address;
 
-    public Customer(String myId, String name, String document, List<String> emails, List<String> phones, Address Address) {
+    public Customer() {
+    }
+
+    public Customer(String myId, String name, String document, String emails, String phones, Address Address) {
         this.myId = myId;
         this.name = name;
-        this.document = document;
-        this.emails = emails;
-        this.phones = phones.stream().map(m -> new BigDecimal(m).setScale(0)).collect(Collectors.toList());
+        this.document = document.replace("-", "").replace("/", "").replace("-", "").replace(".", "").trim();
+        this.emails = Arrays.asList(new String[]{emails});
+        String phone2 = phones.replace("(", "").replace(")", "").replace("-", "");
+        System.out.println(phone2);
+        if (phone2 != null && !phone2.isEmpty()) {
+            this.phones = Arrays.asList(new BigDecimal[]{new BigDecimal(phone2).setScale(0)});
+        }
         this.Address = Address;
     }
 

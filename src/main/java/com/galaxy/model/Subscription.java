@@ -11,12 +11,15 @@ import java.util.List;
  *
  * @author Renato
  */
-public class Charge {
+public class Subscription {
 
     private String myId;
     private String galaxPayId;
 
     private Integer value;
+    private Integer quantity;
+    private String periodicity;
+    private String firstPayDayDate;
     private Boolean payedOutsideGalaxPay;
     private String paymentLink;
     private String mainPaymentMethodId;
@@ -29,7 +32,7 @@ public class Charge {
     private List<Transactions> Transactions;
     private PaymentMethodBoleto PaymentMethodBoleto;
 
-    public Charge() {
+    public Subscription() {
     }
 
     public String getMyId() {
@@ -134,6 +137,30 @@ public class Charge {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPeriodicity() {
+        return periodicity;
+    }
+
+    public void setPeriodicity(String periodicity) {
+        this.periodicity = periodicity;
+    }
+
+    public String getFirstPayDayDate() {
+        return firstPayDayDate;
+    }
+
+    public void setFirstPayDayDate(String firstPayDayDate) {
+        this.firstPayDayDate = firstPayDayDate;
     }
 
 }

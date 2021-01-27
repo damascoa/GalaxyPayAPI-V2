@@ -11,11 +11,22 @@ package com.galaxy.model;
  */
 public class Transactions {
 
+    private String myId;
+    private String galaxPayId;
+    private String subscriptionMyId;
+    private String subscriptionGalaxPayId;
+    private Boolean payedOutsideGalaxPay;
+    private String chargeGalaxPayId;
+    private String chargeMyId;
+
     private Integer value;
     private String payday;
-    private String installment;
+    private String paydayDate;
+    private String additionalInfo;
+    private Integer installment;
+    private String createdAt;
     private String status;
-    private Boleto boleto;
+    private Boleto Boleto;
 
     public Integer getValue() {
         return value;
@@ -33,12 +44,20 @@ public class Transactions {
         this.payday = payday;
     }
 
-    public String getInstallment() {
+    public Integer getInstallment() {
         return installment;
     }
 
-    public void setInstallment(String installment) {
+    public void setInstallment(Integer installment) {
         this.installment = installment;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getStatus() {
@@ -49,12 +68,84 @@ public class Transactions {
         this.status = status;
     }
 
-    public Boleto getBoleto() {
-        return boleto;
+    public String getMyId() {
+        return myId;
     }
 
-    public void setBoleto(Boleto boleto) {
-        this.boleto = boleto;
+    public void setMyId(String myId) {
+        this.myId = myId;
+    }
+
+    public String getGalaxPayId() {
+        return galaxPayId;
+    }
+
+    public void setGalaxPayId(String galaxPayId) {
+        this.galaxPayId = galaxPayId;
+    }
+
+    public String getChargeGalaxPayId() {
+        return chargeGalaxPayId;
+    }
+
+    public void setChargeGalaxPayId(String chargeGalaxPayId) {
+        this.chargeGalaxPayId = chargeGalaxPayId;
+    }
+
+    public String getChargeMyId() {
+        return chargeMyId;
+    }
+
+    public void setChargeMyId(String chargeMyId) {
+        this.chargeMyId = chargeMyId;
+    }
+
+    public String getPaydayDate() {
+        return paydayDate;
+    }
+
+    public void setPaydayDate(String paydayDate) {
+        this.paydayDate = paydayDate;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public Boleto getBoleto() {
+        return Boleto;
+    }
+
+    public void setBoleto(Boleto Boleto) {
+        this.Boleto = Boleto;
+    }
+
+    public String getSubscriptionMyId() {
+        return subscriptionMyId;
+    }
+
+    public void setSubscriptionMyId(String subscriptionMyId) {
+        this.subscriptionMyId = subscriptionMyId;
+    }
+
+    public String getSubscriptionGalaxPayId() {
+        return subscriptionGalaxPayId;
+    }
+
+    public void setSubscriptionGalaxPayId(String subscriptionGalaxPayId) {
+        this.subscriptionGalaxPayId = subscriptionGalaxPayId;
+    }
+
+    public Boolean getPayedOutsideGalaxPay() {
+        return payedOutsideGalaxPay;
+    }
+
+    public void setPayedOutsideGalaxPay(Boolean payedOutsideGalaxPay) {
+        this.payedOutsideGalaxPay = payedOutsideGalaxPay;
     }
 
 }

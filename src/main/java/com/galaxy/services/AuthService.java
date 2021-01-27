@@ -27,7 +27,8 @@ public class AuthService {
                 .header("Authorization", "Basic " + Base64.getEncoder().encodeToString((Constantes.galaxId + ":" + Constantes.galaxHash).getBytes("utf-8")))
                 .header("Content-Type", "application/json")
                 .body(jsonAuth).asObject(AuthReturn.class);
-        System.out.println("TOKEN: "+saida.getBody().getAccess_token());
+        System.out.println("AUTH: " + "Basic " + Base64.getEncoder().encodeToString((Constantes.galaxId + ":" + Constantes.galaxHash).getBytes("utf-8")));
+        System.out.println("TOKEN: " + saida.getBody().getAccess_token());
         switch (saida.getStatus()) {
             case 200:
                 return saida.getBody();

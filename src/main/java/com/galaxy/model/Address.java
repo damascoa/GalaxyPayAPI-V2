@@ -20,7 +20,7 @@ public class Address {
     private String state;
 
     public Address(String zipCode, String street, String number, String neighborhood, String city, String state) {
-        this.zipCode = zipCode;
+        this.zipCode = zipCode.replace("-", "").replace(".", "").trim();
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
@@ -29,7 +29,7 @@ public class Address {
     }
 
     public Address(String zipCode, String street, String number, String complement, String neighborhood, String city, String state) {
-        this.zipCode = zipCode;
+        this.zipCode = zipCode.replace("-", "").replace(".", "").trim();
         this.street = street;
         this.number = number;
         this.complement = complement;

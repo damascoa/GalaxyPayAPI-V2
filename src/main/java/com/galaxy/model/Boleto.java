@@ -6,6 +6,7 @@
 package com.galaxy.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -13,24 +14,26 @@ import java.math.BigDecimal;
  */
 public class Boleto {
 
-    private Integer value;
-    private String additionalInfo;
     private String myId;
-    private String payday;
-    private Boolean payedOutsideGalaxPay;
+    private Integer value;
+    private Integer quantity = 1;
+    private String periodicity = "monthly";
+    private String firstPayDayDate;
+    private String additionalInfo;
     private String mainPaymentMethodId = "boleto";
     private Customer Customer;
     private PaymentMethodBoleto paymentMethodBoleto;
     private String pdf;
     private String bankLine;
+    private String bankNumber;
+    private List<Transactions> Transactions;
 
     public Boleto(BigDecimal valor, String additionalInfo, String myId, String payday, Boolean payedOutsideGalaxPay, Customer customer,
             BigDecimal multa, BigDecimal juros, String instrucoes) {
         this.value = valor.multiply(new BigDecimal(100)).intValue();
         this.additionalInfo = additionalInfo;
         this.myId = myId;
-        this.payday = payday;
-        this.payedOutsideGalaxPay = payedOutsideGalaxPay;
+
         this.Customer = customer;
         this.paymentMethodBoleto = new PaymentMethodBoleto(multa.multiply(new BigDecimal(100)).intValue(), juros.multiply(new BigDecimal(100)).intValue(), instrucoes);
     }
@@ -57,22 +60,6 @@ public class Boleto {
 
     public void setMyId(String myId) {
         this.myId = myId;
-    }
-
-    public String getPayday() {
-        return payday;
-    }
-
-    public void setPayday(String payday) {
-        this.payday = payday;
-    }
-
-    public Boolean getPayedOutsideGalaxPay() {
-        return payedOutsideGalaxPay;
-    }
-
-    public void setPayedOutsideGalaxPay(Boolean payedOutsideGalaxPay) {
-        this.payedOutsideGalaxPay = payedOutsideGalaxPay;
     }
 
     public String getMainPaymentMethodId() {
@@ -113,6 +100,46 @@ public class Boleto {
 
     public void setBankLine(String bankLine) {
         this.bankLine = bankLine;
+    }
+
+    public String getBankNumber() {
+        return bankNumber;
+    }
+
+    public void setBankNumber(String bankNumber) {
+        this.bankNumber = bankNumber;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPeriodicity() {
+        return periodicity;
+    }
+
+    public void setPeriodicity(String periodicity) {
+        this.periodicity = periodicity;
+    }
+
+    public String getFirstPayDayDate() {
+        return firstPayDayDate;
+    }
+
+    public void setFirstPayDayDate(String firstPayDayDate) {
+        this.firstPayDayDate = firstPayDayDate;
+    }
+
+    public List<Transactions> getTransactions() {
+        return Transactions;
+    }
+
+    public void setTransactions(List<Transactions> Transactions) {
+        this.Transactions = Transactions;
     }
 
 }

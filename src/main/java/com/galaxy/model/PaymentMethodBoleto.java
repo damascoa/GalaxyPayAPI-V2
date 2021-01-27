@@ -21,7 +21,7 @@ public class PaymentMethodBoleto {
 //    Valores válidos de 0 a 59.
     private Integer deadlineDays;
 
-    private Discount discount;
+    private Discount Discount;
 
     public PaymentMethodBoleto() {
     }
@@ -30,7 +30,7 @@ public class PaymentMethodBoleto {
         this.fine = fine;
         this.interest = interest;
         this.instructions = instructions;
-        this.deadlineDays = 0;
+        this.deadlineDays = 30;
     }
 
     public Integer getFine() {
@@ -66,11 +66,11 @@ public class PaymentMethodBoleto {
     }
 
     public Discount getDiscount() {
-        return discount;
+        return Discount;
     }
 
-    public void setDiscount(Discount discount) {
-        this.discount = discount;
+    public void setDiscount(Discount Discount) {
+        this.Discount = Discount;
     }
 
 }
